@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { GraduationCap, Briefcase, MapPin, Calendar, ChevronDown } from "lucide-react";
+import { Briefcase, MapPin, Calendar, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { experiences } from "@/data/experience";
 import type { Experience } from "@/types";
@@ -80,51 +80,6 @@ function WorkCard({ e, open, onToggle }: { e: WorkEntry; open: boolean; onToggle
   );
 }
 
-function EduCard({ e, open, onToggle }: { e: EduEntry; open: boolean; onToggle: () => void }) {
-  return (
-    <motion.div layout onClick={onToggle} whileHover={{ y: -2 }} className="glass rounded-2xl p-5 cursor-pointer select-none"
-      transition={{ layout: { duration: 0.38, ease: [0.22, 1, 0.36, 1] } }}>
-      <div className="flex items-start gap-3">
-        <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${e.color} flex items-center justify-center text-white shrink-0`}>
-          <GraduationCap className="h-5 w-5" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-start justify-between gap-2">
-            <div className="min-w-0">
-              <h3 className="font-bold text-base leading-snug">{e.institution}</h3>
-              <p className="text-sm font-semibold mt-0.5" style={{ color: "hsl(190,80%,62%)" }}>{e.degree}</p>
-            </div>
-            <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.28 }} className="shrink-0 mt-0.5">
-              <ChevronDown className="h-4 w-4 text-muted-foreground" />
-            </motion.div>
-          </div>
-          <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-2 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1"><Calendar className="h-3 w-3 shrink-0" />{e.period}</span>
-            <span className="flex items-center gap-1"><MapPin className="h-3 w-3 shrink-0" />{e.location}</span>
-          </div>
-          <div className="mt-2 flex items-center gap-2 flex-wrap">
-            <Badge kind="education" />
-            <span className="text-xs font-bold gradient-text">GPA {e.gpa}</span>
-          </div>
-        </div>
-      </div>
-
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div key="body" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }} className="overflow-hidden">
-            <div className="mt-4 pt-4" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-2">Key Courses</p>
-              <div className="flex flex-wrap gap-1.5">
-                {e.courses.map((c) => <span key={c} className="tag-pill">{c}</span>)}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
 
 function TimelineDot({ color }: { color: string }) {
   return (

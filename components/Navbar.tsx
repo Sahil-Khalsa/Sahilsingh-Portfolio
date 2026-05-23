@@ -57,6 +57,7 @@ function NavPill({ active, scrolled }: { active: string; scrolled: boolean }) {
   useEffect(() => {
     window.addEventListener("resize", measure);
     return () => window.removeEventListener("resize", measure);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
   return (
