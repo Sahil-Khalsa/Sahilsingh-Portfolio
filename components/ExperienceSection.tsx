@@ -8,25 +8,19 @@ import type { Experience } from "@/types";
 import { SectionWrapper, SectionHeading } from "./SectionWrapper";
 
 type WorkEntry = { kind: "work" } & Experience;
-type TimelineEntry = WorkEntry;
 
-const TIMELINE: TimelineEntry[] = [
+const TIMELINE: WorkEntry[] = [
   { kind: "work", ...experiences[0] },
   { kind: "work", ...experiences[1] },
   { kind: "work", ...experiences[2] },
   { kind: "work", ...experiences[3] },
 ];
 
-function Badge({ kind }: { kind: "work" | "education" }) {
-  return kind === "work" ? (
+function Badge() {
+  return (
     <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-semibold"
       style={{ background: "rgba(139,92,246,0.12)", border: "1px solid rgba(139,92,246,0.25)", color: "hsl(252,65%,72%)" }}>
       <Briefcase className="h-2.5 w-2.5" /> Work
-    </span>
-  ) : (
-    <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full font-semibold"
-      style={{ background: "rgba(6,182,212,0.10)", border: "1px solid rgba(6,182,212,0.25)", color: "hsl(190,80%,62%)" }}>
-      <GraduationCap className="h-2.5 w-2.5" /> Education
     </span>
   );
 }
@@ -53,7 +47,7 @@ function WorkCard({ e, open, onToggle }: { e: WorkEntry; open: boolean; onToggle
             <span className="flex items-center gap-1"><Calendar className="h-3 w-3 shrink-0" />{e.period}</span>
             <span className="flex items-center gap-1"><MapPin className="h-3 w-3 shrink-0" />{e.location}</span>
           </div>
-          <div className="mt-2"><Badge kind="work" /></div>
+          <div className="mt-2"><Badge /></div>
         </div>
       </div>
 
@@ -80,7 +74,6 @@ function WorkCard({ e, open, onToggle }: { e: WorkEntry; open: boolean; onToggle
   );
 }
 
-
 function TimelineDot({ color }: { color: string }) {
   return (
     <motion.div
@@ -94,7 +87,6 @@ function TimelineDot({ color }: { color: string }) {
 
 export function ExperienceSection() {
   const [openId, setOpenId] = useState<string>("work-1");
-
   const toggle = (id: string) => setOpenId(prev => prev === id ? "" : id);
 
   return (
@@ -103,17 +95,14 @@ export function ExperienceSection() {
         <SectionHeading title="Journey &" highlight="Timeline" subtitle="Professional milestones and academic background, all in one view." />
 
         <div className="relative">
-          {/* Vertical line — desktop (center) */}
           <div aria-hidden className="hidden md:block absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-px pointer-events-none"
             style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(139,92,246,0.35) 12%, rgba(139,92,246,0.35) 88%, transparent 100%)" }} />
-
-          {/* Vertical line — mobile (left) */}
           <div aria-hidden className="md:hidden absolute left-[18px] top-4 bottom-4 w-px pointer-events-none"
             style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(139,92,246,0.35) 12%, rgba(139,92,246,0.35) 88%, transparent 100%)" }} />
 
           <div className="flex flex-col gap-6 md:gap-8">
             {TIMELINE.map((item, index) => {
-              const id    = item.kind === "work" ? `work-${item.id}` : `edu-${item.id}`;
+              const id = `work-${item.id}`;
               const isLeft = index % 2 === 0;
 
               return (
@@ -122,38 +111,24 @@ export function ExperienceSection() {
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {/* ── Mobile ────────────────────────────── */}
+                  {/* Mobile */}
                   <div className="md:hidden relative pl-10">
                     <div className="absolute left-[10px] top-[18px]">
                       <TimelineDot color={item.color} />
                     </div>
-                    {item.kind === "work"
-                      ? <WorkCard e={item} open={openId === id} onToggle={() => toggle(id)} />
-                      : <EduCard  e={item} open={openId === id} onToggle={() => toggle(id)} />
-                    }
+                    <WorkCard e={item} open={openId === id} onToggle={() => toggle(id)} />
                   </div>
 
-                  {/* ── Desktop ───────────────────────────── */}
+                  {/* Desktop */}
                   <div className="hidden md:grid grid-cols-[1fr_3rem_1fr] items-start gap-2">
-                    {/* Left slot */}
                     <div className="pr-2">
-                      {isLeft && (item.kind === "work"
-                        ? <WorkCard e={item} open={openId === id} onToggle={() => toggle(id)} />
-                        : <EduCard  e={item} open={openId === id} onToggle={() => toggle(id)} />
-                      )}
+                      {isLeft && <WorkCard e={item} open={openId === id} onToggle={() => toggle(id)} />}
                     </div>
-
-                    {/* Dot (always centered) */}
                     <div className="flex justify-center pt-[18px]">
                       <TimelineDot color={item.color} />
                     </div>
-
-                    {/* Right slot */}
                     <div className="pl-2">
-                      {!isLeft && (item.kind === "work"
-                        ? <WorkCard e={item} open={openId === id} onToggle={() => toggle(id)} />
-                        : <EduCard  e={item} open={openId === id} onToggle={() => toggle(id)} />
-                      )}
+                      {!isLeft && <WorkCard e={item} open={openId === id} onToggle={() => toggle(id)} />}
                     </div>
                   </div>
                 </motion.div>
