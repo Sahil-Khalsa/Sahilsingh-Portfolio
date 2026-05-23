@@ -22,10 +22,10 @@ function cn(...classes: (string | boolean | undefined)[]) {
 }
 
 function useTheme() {
-  const [dark, setDark] = useState(true);
+  const [dark, setDark] = useState(false);
   useEffect(() => {
     const stored = localStorage.getItem("theme");
-    const isDark = stored !== "light";
+    const isDark = stored === "dark";
     setDark(isDark);
     document.documentElement.classList.toggle("dark", isDark);
   }, []);
