@@ -6,7 +6,7 @@ export const projects: Project[] = [
     title: "LedgerLens: Multimodal Financial-Filing Intelligence Engine",
     description:
       "Full-stack multimodal RAG engine for SEC financial filings that retrieves over rendered page images instead of mangled HTML text. A 6-node LangGraph agent (planner, visual retriever, extractor, verifier, synthesizer, critic) cross-checks every extracted figure against the SEC's own XBRL structured data before it reaches the user, making hallucinated numbers architecturally impossible. ColPali v1.2 drives two-stage visual retrieval with MaxSim reranking over 1,030 patch vectors per page. Achieved 83.3% numeric exact match and 0% hallucination rate on a 15-item eval set spanning NVDA and MSFT 10-Ks.",
-    image: "",
+    image: "/LedgerLens_Image.png",
     tags: ["LangGraph", "ColPali", "FastAPI", "pgvector", "GPT-4o", "Next.js", "PostgreSQL", "Python"],
     demoUrl: "#",
     githubUrl: "https://github.com/Sahil-Khalsa/LedgerLens",
