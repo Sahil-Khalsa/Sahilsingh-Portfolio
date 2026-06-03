@@ -141,7 +141,7 @@ export function HeroSection() {
                 }}>
                 View My Work <ArrowRight size={15} className="ml-1" />
               </a>
-              <a href="https://drive.google.com/file/d/1R0IMaFJGsqD5XIo5eZm89BzscDimUmI-/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+              <a href="https://drive.google.com/file/d/1F8W3cOb1qwNrpZ4VyFpRSUlrD_no-0Pv/view?usp=sharing" target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-7 py-3 rounded-lg text-sm font-bold transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110 active:scale-[0.98]"
                 style={{
                   background: "rgba(255,255,255,0.1)",
