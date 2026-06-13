@@ -31,7 +31,7 @@ export const projects: Project[] = [
     image: "/Outrach_revival.png",
     tags: ["Claude AI", "Next.js", "Supabase", "tRPC", "FHIR R4", "Twilio", "pgvector", "LangGraph"],
     demoUrl: "https://outreach-production-04e5.up.railway.app",
-    githubUrl: "#",
+    githubUrl: "https://github.com/Sahil-Khalsa/outreach-revival",
     accent: "from-emerald-500 to-teal-600",
   },
   {
