@@ -27,7 +27,7 @@ export const projects: Project[] = [
     id: 3,
     title: "Outreach Revival: Community Health Platform",
     description:
-      "Full-stack AI volunteer dispatch platform connecting elderly and homebound residents with vetted volunteers from faith-based organizations. An 8-agent Claude network over 5 MCP servers handles intake triage, volunteer matching, SMS dispatch, FHIR R4 referral ingestion, daily risk scans, and audit logging. A 6-signal weighted formula scores volunteers by distance, schedule, skills, rating, language, and relationship history. Built with Next.js 15, tRPC v11, Supabase Realtime, pgvector, and 118 passing tests.",
+      "AI-triaged volunteer dispatch platform connecting elderly and homebound residents with vetted volunteers from faith-based organizations. An 8-agent Claude network over 5 MCP servers handles intake, matching, SMS dispatch, FHIR R4 referrals, and daily risk scans. Volunteers are ranked by a 6-signal weighted formula covering distance, schedule, skills, rating, language, and relationship history.",
     image: "/Outrach_revival.png",
     tags: ["Claude AI", "Next.js", "Supabase", "tRPC", "FHIR R4", "Twilio", "pgvector", "LangGraph"],
     demoUrl: "https://outreach-production-04e5.up.railway.app",
