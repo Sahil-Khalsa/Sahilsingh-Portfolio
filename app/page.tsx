@@ -6,6 +6,7 @@ import { SkillsSection }          from "@/components/SkillsSection";
 import { ProjectsSection }        from "@/components/ProjectsSection";
 import { CertificationsSection }  from "@/components/CertificationsSection";
 import { ContactSection }    from "@/components/ContactSection";
+import { StatsMarquee }     from "@/components/StatsMarquee";
 import { Footer }            from "@/components/Footer";
 import { StarBackground }    from "@/components/StarBackground";
 import { ScrollProgressBar } from "@/components/ScrollProgressBar";
@@ -21,6 +22,7 @@ export default function Home() {
 
       <main className="relative z-10">
         <HeroSection />
+        <StatsMarquee />
         <AboutSection />
         <ExperienceSection />
         <ProjectsSection />
