@@ -1,14 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-
-const STATS = [
-  { value: 4,   suffix: "",  label: "Projects Shipped" },
-  { value: 8,   suffix: "+", label: "AI Agents Built"  },
-  { value: 583, suffix: "+", label: "Tests Written"    },
-  { value: 0,   suffix: "%", label: "Hallucination Rate" },
-];
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 const TECHS = [
   "Python", "FastAPI", "LangGraph", "ColPali", "Next.js 15",
@@ -17,76 +10,108 @@ const TECHS = [
   "FHIR R4", "Mapbox", "Twilio", "AWS", "WebSocket", "Prisma", "React",
 ];
 
-function Counter({ value, suffix }: { value: number; suffix: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
+const PHRASES = [
+  "AI systems that ship",
+  "Full-stack, end to end",
+  "Built for real users",
+  "From idea to production",
+  "RAG pipelines that verify",
+  "Agents that reason",
+  "Backend systems at scale",
+  "Cloud-native by default",
+  "Multimodal by design",
+  "Zero compromise on quality",
+  "Data-driven decisions",
+  "Production-grade AI",
+];
 
-  useEffect(() => {
-    if (!inView) return;
-    if (value === 0) { setCount(0); return; }
-    const steps = Math.min(value, 60);
-    const increment = value / steps;
-    const interval = 1400 / steps;
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= value) { setCount(value); clearInterval(timer); }
-      else setCount(Math.floor(current));
-    }, interval);
-    return () => clearInterval(timer);
-  }, [inView, value]);
+function TechPill({ label }: { label: string }) {
+  return (
+    <span
+      className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-all duration-300"
+      style={{
+        background: "rgba(139,92,246,0.07)",
+        border: "1px solid rgba(139,92,246,0.18)",
+        color: "hsl(252,65%,72%)",
+        boxShadow: "0 0 0 0 rgba(139,92,246,0)",
+      }}
+    >
+      <span className="w-1.5 h-1.5 rounded-full shrink-0"
+        style={{ background: "linear-gradient(135deg, hsl(252,65%,65%), hsl(190,80%,55%))" }} />
+      {label}
+    </span>
+  );
+}
 
-  return <span ref={ref}>{count}{suffix}</span>;
+function PhrasePill({ label }: { label: string }) {
+  return (
+    <span
+      className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0"
+      style={{
+        background: "rgba(6,182,212,0.05)",
+        border: "1px solid rgba(6,182,212,0.16)",
+      }}
+    >
+      <span className="text-[9px]" style={{ color: "hsl(190,80%,55%)", opacity: 0.7 }}>◆</span>
+      <span className="gradient-text">{label}</span>
+    </span>
+  );
 }
 
 export function StatsMarquee() {
-  const doubled = [...TECHS, ...TECHS];
+  const [pauseRow1, setPauseRow1] = useState(false);
+  const [pauseRow2, setPauseRow2] = useState(false);
+
+  const doubledTechs   = [...TECHS,   ...TECHS];
+  const doubledPhrases = [...PHRASES, ...PHRASES];
 
   return (
-    <div className="relative z-10 py-6">
-      {/* Stats Bar */}
-      <div className="container mx-auto max-w-4xl px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="glass rounded-2xl px-4 py-5 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x"
-          style={{ borderColor: "rgba(139,92,246,0.15)" }}
-        >
-          {STATS.map((s) => (
-            <div key={s.label} className="flex flex-col items-center gap-1 px-4">
-              <span className="text-3xl md:text-4xl font-black gradient-text">
-                <Counter value={s.value} suffix={s.suffix} />
-              </span>
-              <span className="text-xs text-muted-foreground font-medium text-center leading-snug">
-                {s.label}
-              </span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="relative z-10 py-8 space-y-3"
+    >
+      {/* Fade edges */}
+      <div className="absolute left-0 top-0 bottom-0 w-28 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to right, hsl(var(--background)) 30%, transparent)" }} />
+      <div className="absolute right-0 top-0 bottom-0 w-28 z-10 pointer-events-none"
+        style={{ background: "linear-gradient(to left, hsl(var(--background)) 30%, transparent)" }} />
 
-      {/* Tech Marquee */}
-      <div className="mt-6 overflow-hidden relative">
-        <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to right, hsl(var(--background)), transparent)" }} />
-        <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none"
-          style={{ background: "linear-gradient(to left, hsl(var(--background)), transparent)" }} />
-
-        <motion.div
+      {/* Row 1: tech names — scrolls left */}
+      <div
+        className="overflow-hidden cursor-default"
+        onMouseEnter={() => setPauseRow1(true)}
+        onMouseLeave={() => setPauseRow1(false)}
+      >
+        <div
           className="flex gap-3 w-max"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          style={{
+            animation: "marquee-left 35s linear infinite",
+            animationPlayState: pauseRow1 ? "paused" : "running",
+          }}
         >
-          {doubled.map((tech, i) => (
-            <span key={i} className="tag-pill whitespace-nowrap shrink-0">
-              {tech}
-            </span>
-          ))}
-        </motion.div>
+          {doubledTechs.map((tech, i) => <TechPill key={i} label={tech} />)}
+        </div>
       </div>
-    </div>
+
+      {/* Row 2: phrases — scrolls right */}
+      <div
+        className="overflow-hidden cursor-default"
+        onMouseEnter={() => setPauseRow2(true)}
+        onMouseLeave={() => setPauseRow2(false)}
+      >
+        <div
+          className="flex gap-3 w-max"
+          style={{
+            animation: "marquee-right 28s linear infinite",
+            animationPlayState: pauseRow2 ? "paused" : "running",
+          }}
+        >
+          {doubledPhrases.map((phrase, i) => <PhrasePill key={i} label={phrase} />)}
+        </div>
+      </div>
+    </motion.section>
   );
 }
