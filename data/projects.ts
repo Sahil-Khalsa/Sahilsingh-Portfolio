@@ -27,10 +27,10 @@ export const projects: Project[] = [
     id: 3,
     title: "Outreach Revival: Community Health Platform",
     description:
-      "Multi-agent community health platform connecting elderly and homebound residents with vetted volunteers from local faith organizations. An 8-agent Claude network handles intake triage, volunteer matching, SMS dispatch, FHIR R4 referral ingestion, daily risk scans, and audit logging via MCP servers and the A2A protocol. A 6-signal weighted formula scores volunteers by distance, schedule overlap, skills, rating, language, and relationship history. Finishes a 2003 NIH-funded proof of concept that the technology of the time could not deliver.",
+      "Full-stack AI volunteer dispatch platform connecting elderly and homebound community members with vetted volunteers from faith-based organizations. An 8-agent Claude network (Opus 4.7 orchestrator, Sonnet 4.6 intake + referral + risk, Haiku 4.5 match + geo + notify + audit) operates over 5 MCP servers and an A2A protocol layer. A mandatory safety screen gates every intake; passing needs are scored by a 6-signal weighted formula (distance, schedule, skills, rating, language, relationship continuity) to produce a ranked top-5 volunteer pool. SMS check-in/out tracking, a daily 7am risk scan, warm handoff escalation with APS mandatory reporting gate (Illinois 320 ILCS 20), and Supabase Realtime CDC map pins round out the platform. Built with Next.js 15, tRPC v11, Prisma, pgvector, and 118 passing tests.",
     image: "",
-    tags: ["Claude AI", "Next.js", "Supabase", "Mapbox", "FHIR R4", "Twilio", "pgvector"],
-    demoUrl: "#",
+    tags: ["Claude AI", "Next.js", "Supabase", "tRPC", "FHIR R4", "Twilio", "pgvector", "LangGraph"],
+    demoUrl: "https://outreach-production-04e5.up.railway.app",
     githubUrl: "#",
     accent: "from-emerald-500 to-teal-600",
   },
