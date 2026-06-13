@@ -55,7 +55,7 @@ export function HeroSection() {
   const role = useTypewriter(PHRASES);
 
   return (
-    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 pb-20 md:pt-0 md:pb-0 overflow-hidden">
 
       {/* ── Dot grid texture ─────────────────────────────────────── */}
       <div aria-hidden className="pointer-events-none absolute inset-0" style={{ zIndex: 0,
@@ -82,7 +82,7 @@ export function HeroSection() {
       <div className="container max-w-5xl mx-auto z-10 w-full">
         <motion.div
           variants={container} initial="hidden" animate="show"
-          className="flex flex-col-reverse md:flex-row items-center justify-between gap-8 md:gap-4"
+          className="flex flex-col-reverse md:flex-row items-center justify-between gap-6 md:gap-4"
         >
 
           {/* ── Left: text ─────────────────────────────────────────── */}
@@ -217,7 +217,7 @@ export function HeroSection() {
             </motion.div>
 
             {/* Actual photo — circular crop */}
-            <div className="relative rounded-full overflow-hidden w-[210px] h-[210px] md:w-[360px] md:h-[360px]"
+            <div className="relative rounded-full overflow-hidden w-[170px] h-[170px] md:w-[360px] md:h-[360px]"
               style={{ background: "hsl(224,50%,5%)" }}>
               <Image
                 src="/profile.jpg"
@@ -237,7 +237,7 @@ export function HeroSection() {
       <motion.a
         href="#about"
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300"
+        className="hidden md:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300"
         aria-label="Scroll to about"
       >
         <span className="text-[10px] tracking-[0.2em] uppercase font-medium">Scroll</span>
