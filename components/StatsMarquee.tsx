@@ -88,7 +88,7 @@ export function StatsMarquee() {
         <div
           className="flex gap-3 w-max"
           style={{
-            animation: "marquee-left 35s linear infinite",
+            animation: "marquee-left 55s linear infinite",
             animationPlayState: pauseRow1 ? "paused" : "running",
           }}
         >
@@ -105,7 +105,7 @@ export function StatsMarquee() {
         <div
           className="flex gap-3 w-max"
           style={{
-            animation: "marquee-right 28s linear infinite",
+            animation: "marquee-right 45s linear infinite",
             animationPlayState: pauseRow2 ? "paused" : "running",
           }}
         >
